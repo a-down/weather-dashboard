@@ -11,5 +11,6 @@ header {
   height: 100px;
   background: var(--primary-gradient);
   border-bottom: 2px solid black;
+  width: 100%;
 }
 
