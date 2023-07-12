@@ -1,3 +1,15 @@
-* {
-  color: pink;
+:root {
+  --primary: #E2B166;
+  --primary-gradient: linear-gradient(7deg, #FFFFFF -125%, #E2B166 100%)
 }
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  height: 100px;
+  background: var(--primary-gradient);
+  border-bottom: 2px solid black;
+}
+
