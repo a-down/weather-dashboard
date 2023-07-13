@@ -6,6 +6,8 @@ const searchEl = $('.search-section')
 const searchHistoryEl = $('.search-history')
 let cityName
 const currentWeatherEl = $('.current-weather-section')
+var lat;
+var lon;
 
 let searchHistory = [];
 
@@ -96,9 +98,7 @@ function updateCurrentWeather(city) {
 // get lat and lon for cityName
 function getCityLocation() {
   var geocodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
-  console.log(geocodeUrl)
-  var lat;
-  var lon;
+  console.log(geocodeUrl);
 
 
   //  gary's quick fetch
@@ -112,24 +112,21 @@ function getCityLocation() {
     })
   }
   
+  // run quick fetch and get the lat and lon of city
   quickFetch(geocodeUrl).then( function(data){
     console.log(data)
     lat = data[0].lat;
     lon = data[0].lon;
     console.log(lon)
+    getCityCurrentWeather();
   } )
-
-  
-  
 }
 
-var geocodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
-console.log(geocodeUrl)
-
-
+function getCityCurrentWeather() {
+  console.log(lat)
+}
 
 // get API data for cityName
-var apiKey = '13dbd31c9feddad4ad5732ff7f8f432f'
 var currentWeatherUrl =  'https://api.openweathermap.org/data/2.5/weather?'
 
 
