@@ -33,7 +33,16 @@ let searchHistory = [];
 
 
 
-
+//  gary's quick fetch
+function quickFetch(url){
+  return fetch(url)
+  .then( function(resp) {
+    return resp.json()
+  })
+  .then(function(data){
+    return data
+  })
+}
 
 // display search history on load
 function displaySearchHistory() {
@@ -97,24 +106,11 @@ function updateCurrentWeather(city) {
 }
 
 
-// get lat and lon for cityName
+// run quick fetch and get the lat and lon of city
 function getCityLocation() {
   var geocodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
   console.log(geocodeUrl);
 
-
-  //  gary's quick fetch
-  function quickFetch(url){
-    return fetch(url)
-    .then( function(resp) {
-      return resp.json()
-    })
-    .then(function(data){
-      return data
-    })
-  }
-  
-  // run quick fetch and get the lat and lon of city
   quickFetch(geocodeUrl).then( function(data){
     console.log(data)
     lat = data[0].lat;
@@ -124,22 +120,11 @@ function getCityLocation() {
   } )
 }
 
+
+// run quick fetch and display current weather
 function getCityCurrentWeather() {
   var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
-
-
-  //  gary's quick fetch
-  function quickFetch(url){
-    return fetch(url)
-    .then( function(resp) {
-      return resp.json()
-    })
-    .then(function(data){
-      return data
-    })
-  }
   
-  // run quick fetch and get the lat and lon of city
   quickFetch(currentWeatherUrl).then( function(data){
     console.log(data);
     const tempDisplay = $('.temp-display');
@@ -148,18 +133,30 @@ function getCityCurrentWeather() {
     tempDisplay.text(`Temp: ${data.main.temp}°F`)
     windDisplay.text(`Wind: ${data.wind.speed} MPH`)
     humidityDisplay.text(`Humidity: ${data.main.humidity}%`)
+    getCityFutureWeather();
   } )
 }
 
-// get API data for cityName
-
-
-
-
-
-
-// display current weather for cityName
-
-
 
 // loop to display future weather
+function getCityFutureWeather() {
+  var futureWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+  console.log(futureWeatherUrl);
+  
+
+  quickFetch(futureWeatherUrl).then( function(data){
+    console.log(data);
+    const newForecastArr = [] 
+    for( let i=0; i<40; i=i+8 ){
+      newForecastArr.push( data.list[i])
+    }
+    console.log(newForecastArr)
+  } )
+
+ 
+  
+}
+
+
+
+
