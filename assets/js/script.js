@@ -59,6 +59,7 @@ searchButton.on('click', function(event) {
   event.preventDefault();
   cityName = searchInput.val();
   console.log(cityName);
+  searchInput.val('');
   saveSearchHistory(cityName);
   updateCurrentWeather(cityName);
 })
