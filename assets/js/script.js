@@ -26,7 +26,11 @@ let searchHistory = [];
     // triger display future weather
 
 
-// display search history
+
+
+
+
+// display search history on load
 function displaySearchHistory() {
   searchHistory = JSON.parse(localStorage.getItem('Search History:'));
   console.log(searchHistory);
@@ -43,6 +47,8 @@ function displaySearchHistory() {
 displaySearchHistory();
 
 
+
+
 // search button event trigger 
 searchButton.on('click', function(event) {
   event.preventDefault();
@@ -50,6 +56,15 @@ searchButton.on('click', function(event) {
   console.log(cityName);
   saveSearchHistory(cityName);
 })
+
+// search history button event trigger
+searchEl.on('click', 'button', function(event) {
+  event.preventDefault();
+  cityName = $(this).text();
+  console.log(cityName)
+})
+
+
 
 
 // save search to
