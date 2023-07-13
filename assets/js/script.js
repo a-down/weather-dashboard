@@ -138,7 +138,7 @@ function getCityCurrentWeather() {
 }
 
 
-// loop to display future weather
+// function to get future weather
 function getCityFutureWeather() {
   var futureWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
   console.log(futureWeatherUrl);
@@ -151,10 +151,35 @@ function getCityFutureWeather() {
       newForecastArr.push( data.list[i])
     }
     console.log(newForecastArr)
+    
+    displayFutureWeather(newForecastArr);
   } )
+}
 
- 
+
+// display future weather
+function displayFutureWeather(weatherArr) {
+  const futureWeatherDisplay = $('.future-weather-display');
   
+  for (i=0; i < 5; i++) {
+    var newCard = $(`
+      <div class="card col-12 col-lg-2 m-2">
+
+        <div class="card-header">
+          Featured
+        </div>
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Weather Icon</li>
+          <li class="list-group-item">Temp: ${weatherArr[i].main.temp}°F</li>
+          <li class="list-group-item">Wind: ${weatherArr[i].wind.speed} MPH</li>
+          <li class="list-group-item">Humidity: ${weatherArr[i].main.humidity}%</li>
+        </ul>
+
+      </div>
+    `)
+    futureWeatherDisplay.append(newCard);
+  }
 }
 
 
