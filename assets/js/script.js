@@ -44,6 +44,18 @@ function quickFetch(url){
   })
 }
 
+
+// function I wrote (and saved for later) to get the regular date from a unix timestamp (in seconds)
+function getRegularDate(unix) {
+  let newDate = new Date(unix * 1000);
+  let day = newDate.getDate();
+  let month = newDate.getMonth();
+  let year = newDate.getFullYear();
+  var fullNewDate = `${month + 1}/${day}/${year}`
+  return fullNewDate
+  }
+
+
 // display search history on load
 function displaySearchHistory() {
   searchHistory = JSON.parse(localStorage.getItem('Weather Search History:'));
@@ -160,36 +172,24 @@ function getCityFutureWeather() {
 // display future weather
 function displayFutureWeather(weatherArr) {
   const futureWeatherDisplay = $('.future-weather-display');
-  
+  futureWeatherDisplay.text('');
+
+  // for loop to display future weather cards
   for (i=0; i < 5; i++) {
-    
-    // function I wrote (and saved for later) to get the regular date from a unix timestamp (in seconds)
-    function getRegularDate(unix) {
-      let newDate = new Date(unix * 1000);
-      let day = newDate.getDate();
-      let month = newDate.getMonth();
-      let year = newDate.getFullYear();
-      var fullNewDate = `${month + 1}/${day}/${year}`
-      return fullNewDate
-      }
-    
     var fullDate = getRegularDate(weatherArr[i].dt);
     console.log(fullDate);
 
     var newCard = $(`
       <div class="card col-12 col-lg-2 m-2">
-
         <div class="card-header">
           ${fullDate}
         </div>
-
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Weather Icon</li>
           <li class="list-group-item">Temp: ${weatherArr[i].main.temp}°F</li>
           <li class="list-group-item">Wind: ${weatherArr[i].wind.speed} MPH</li>
           <li class="list-group-item">Humidity: ${weatherArr[i].main.humidity}%</li>
         </ul>
-
       </div>
     `)
     futureWeatherDisplay.append(newCard);
