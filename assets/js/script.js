@@ -185,7 +185,7 @@ function displayFutureWeather(weatherArr) {
           ${fullDate}
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Weather Icon</li>
+          <li class="list-group-item">${`<img src="https://openweathermap.org/img/wn/${weatherArr[i].weather[0].icon}@2x.png"/>`}</li>
           <li class="list-group-item">Temp: ${weatherArr[i].main.temp}°F</li>
           <li class="list-group-item">Wind: ${weatherArr[i].wind.speed} MPH</li>
           <li class="list-group-item">Humidity: ${weatherArr[i].main.humidity}%</li>
