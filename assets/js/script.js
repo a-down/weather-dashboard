@@ -2,7 +2,9 @@
 var searchButton = $('button')
 var searchInput = $('input')
 const searchEl = $('.search-section')
+const searchHistoryEl = $('.search-history')
 let cityName
+const currentWeatherEl = $('.current-weather-section')
 
 let searchHistory = [];
 
@@ -41,7 +43,7 @@ function displaySearchHistory() {
       var newButton = $(
         `<button type="submit" class="d-block btn btn-outline-secondary m-2">${searchHistory[i]}</button>`
       )
-      searchEl.append(newButton);
+      searchHistoryEl.append(newButton);
     }
 }}
 displaySearchHistory();
@@ -55,19 +57,12 @@ searchButton.on('click', function(event) {
   cityName = searchInput.val();
   console.log(cityName);
   saveSearchHistory(cityName);
-})
-
-// search history button event trigger
-searchEl.on('click', 'button', function(event) {
-  event.preventDefault();
-  cityName = $(this).text();
-  console.log(cityName)
+  updateCurrentWeather(cityName);
 })
 
 
 
-
-// save search to
+// save search to search history
 function saveSearchHistory(city) {
   searchHistory.push(cityName);
   var searchHistoryJSON = JSON.stringify(searchHistory);
@@ -75,5 +70,20 @@ function saveSearchHistory(city) {
   var newButton = $(
     `<button type="submit" class="d-block btn btn-outline-secondary m-2">${cityName}</button>`
   )
-  searchEl.append(newButton);
+  searchHistoryEl.append(newButton);
+}
+
+
+
+// search history button event trigger
+searchHistoryEl.on('click', 'button', function(event) {
+  event.preventDefault();
+  var cityNameHistory = $(this).text();
+  console.log(cityNameHistory)
+  updateCurrentWeather(cityNameHistory);
+})
+
+
+function updateCurrentWeather(city) {
+  currentWeatherEl.children().eq(0).text(city);
 }
