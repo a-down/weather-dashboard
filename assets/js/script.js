@@ -120,7 +120,7 @@ function updateCurrentWeather(city) {
 
 // run quick fetch and get the lat and lon of city
 function getCityLocation() {
-  var geocodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
+  var geocodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
   console.log(geocodeUrl);
 
   quickFetch(geocodeUrl).then( function(data){
