@@ -125,7 +125,7 @@ function getCityLocation() {
 }
 
 function getCityCurrentWeather() {
-  var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+  var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
 
 
   //  gary's quick fetch
@@ -142,12 +142,17 @@ function getCityCurrentWeather() {
   // run quick fetch and get the lat and lon of city
   quickFetch(currentWeatherUrl).then( function(data){
     console.log(data);
-    
+    const tempDisplay = $('.temp-display');
+    const windDisplay = $('.wind-display');
+    const humidityDisplay = $('.humidity-display');
+    tempDisplay.text(`Temp: ${data.main.temp}°F`)
+    windDisplay.text(`Wind: ${data.wind.speed} MPH`)
+    humidityDisplay.text(`Humidity: ${data.main.humidity}%`)
   } )
 }
 
 // get API data for cityName
-var currentWeatherUrl =  'https://api.openweathermap.org/data/2.5/weather?'
+
 
 
 
