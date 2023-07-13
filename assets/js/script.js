@@ -162,23 +162,25 @@ function displayFutureWeather(weatherArr) {
   const futureWeatherDisplay = $('.future-weather-display');
   
   for (i=0; i < 5; i++) {
-    var unix = weatherArr[i].dt;
-    let date = new Date(unix * 1000);
-    console.log(date)
-    let day = date.getDate();
-    let month = date.getMonth();
-    let year = date.getFullYear();
-    console.log(day)
-    console.log(month)
-    console.log(year)
     
-    var dateOfWeather = `${month + 1}/${day}/${year}`
+    // function I wrote (and saved for later) to get the regular date from a unix timestamp (in seconds)
+    function getRegularDate(unix) {
+      let newDate = new Date(unix * 1000);
+      let day = newDate.getDate();
+      let month = newDate.getMonth();
+      let year = newDate.getFullYear();
+      var fullNewDate = `${month + 1}/${day}/${year}`
+      return fullNewDate
+      }
+    
+    var fullDate = getRegularDate(weatherArr[i].dt);
+    console.log(fullDate);
 
     var newCard = $(`
       <div class="card col-12 col-lg-2 m-2">
 
         <div class="card-header">
-          ${dateOfWeather}
+          ${fullDate}
         </div>
 
         <ul class="list-group list-group-flush">
