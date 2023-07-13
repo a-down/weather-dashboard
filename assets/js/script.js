@@ -37,7 +37,7 @@ let searchHistory = [];
 
 // display search history on load
 function displaySearchHistory() {
-  searchHistory = JSON.parse(localStorage.getItem('Search History:'));
+  searchHistory = JSON.parse(localStorage.getItem('Weather Search History:'));
   console.log(searchHistory);
   if (searchHistory === null) {
     searchHistory = [];
@@ -70,7 +70,7 @@ searchButton.on('click', function(event) {
 function saveSearchHistory(city) {
   searchHistory.push(cityName);
   var searchHistoryJSON = JSON.stringify(searchHistory);
-  localStorage.setItem('Search History:', searchHistoryJSON);
+  localStorage.setItem('Weather Search History:', searchHistoryJSON);
   var newButton = $(
     `<button type="submit" class="d-block btn btn-outline-secondary m-2">${cityName}</button>`
   )
@@ -88,6 +88,7 @@ searchHistoryEl.on('click', 'button', function(event) {
 })
 
 
+// 
 function updateCurrentWeather(city) {
   currentWeatherEl.children().eq(0).text(city);
   cityName = city;
@@ -124,7 +125,25 @@ function getCityLocation() {
 }
 
 function getCityCurrentWeather() {
-  console.log(lat)
+  var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+
+
+  //  gary's quick fetch
+  function quickFetch(url){
+    return fetch(url)
+    .then( function(resp) {
+      return resp.json()
+    })
+    .then(function(data){
+      return data
+    })
+  }
+  
+  // run quick fetch and get the lat and lon of city
+  quickFetch(currentWeatherUrl).then( function(data){
+    console.log(data);
+    
+  } )
 }
 
 // get API data for cityName
