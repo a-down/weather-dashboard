@@ -15,11 +15,16 @@ header {
   width: 100%;
 }
 
-.display-area {
+/* .display-area {
   border: 1px solid black;
   border-radius: 5px;
-}
+} */
 
 button {
   display: block;
+}
+
+.current-weather-section,
+.future-weather-section {
+  visibility: hidden;
 }

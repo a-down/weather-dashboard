@@ -6,6 +6,7 @@ const searchEl = $('.search-section')
 const searchHistoryEl = $('.search-history')
 let cityName
 const currentWeatherEl = $('.current-weather-section')
+const futureWeatherEl = $('.future-weather-section')
 var lat;
 var lon;
 
@@ -94,8 +95,11 @@ searchHistoryEl.on('click', 'button', function(event) {
 
 
 // display city name for current weather section
+// make weather displays visible
 function updateCurrentWeather(city) {
   currentWeatherEl.children().eq(0).text(city);
+  currentWeatherEl.attr('style', 'visibility: visible;')
+  futureWeatherEl.attr('style', 'visibility: visible;')
   cityName = city;
   console.log(cityName)
   getCityLocation();
