@@ -10,6 +10,11 @@ const futureWeatherEl = $('.future-weather-section')
 const weatherDisplayEl = $('.weather-display-section')
 var lat;
 var lon;
+const dateDisplay = $('.date-display');
+const iconDisplay = $('.icon-display');
+const tempDisplay = $('.temp-display');
+const windDisplay = $('.wind-display');
+const humidityDisplay = $('.humidity-display');
 
 let searchHistory = [];
 
@@ -128,15 +133,19 @@ function getCityCurrentWeather() {
   var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
   
   quickFetch(currentWeatherUrl).then( function(data){
-    // console.log(data);
-    const tempDisplay = $('.temp-display');
-    const windDisplay = $('.wind-display');
-    const humidityDisplay = $('.humidity-display');
+    console.log(data);
+    var currentIcon = $(`
+      <p><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"/></p>
+      `)
+    var fullDate = getRegularDate(data.dt);
+   
+    dateDisplay.text(fullDate)
+    iconDisplay.html(currentIcon);
     tempDisplay.text(`Temp: ${data.main.temp}°F`)
     windDisplay.text(`Wind: ${data.wind.speed} MPH`)
     humidityDisplay.text(`Humidity: ${data.main.humidity}%`)
     getCityFutureWeather();
-  } )
+  } ) 
 }
 
 
