@@ -12,27 +12,7 @@ var lon;
 let searchHistory = [];
 
 
-// When I search for a city
-  // presented with current weather conditions
-  // presented with 5-day future weather conditions
-  // that city is added to the search history
-
-
-
-
-  // event listener
-    // button - make an event listener for all buttons in this div. Then no matte
-    // trigger get city function
-    // trigger save to search history function
-      // create button
-    // trigger get API function
-    // trigger getCityWeather function
-    // trigger display current weather
-    // triger display future weather
-
-
-
-
+// FUNCTIONS TO BE CALLED LATER
 //  gary's quick fetch
 function quickFetch(url){
   return fetch(url)
@@ -44,7 +24,6 @@ function quickFetch(url){
   })
 }
 
-
 // function I wrote (and saved for later) to get the regular date from a unix timestamp (in seconds)
 function getRegularDate(unix) {
   let newDate = new Date(unix * 1000);
@@ -54,6 +33,7 @@ function getRegularDate(unix) {
   var fullNewDate = `${month + 1}/${day}/${year}`
   return fullNewDate
   }
+
 
 
 // display search history on load
@@ -74,11 +54,14 @@ displaySearchHistory();
 
 
 
-
 // search button event trigger 
 searchButton.on('click', function(event) {
   event.preventDefault();
   cityName = searchInput.val();
+  if (cityName === '') {
+    alert('Please enter a city name.')
+    return
+  }
   console.log(cityName);
   searchInput.val('');
   saveSearchHistory(cityName);
@@ -109,13 +92,15 @@ searchHistoryEl.on('click', 'button', function(event) {
 })
 
 
-// 
+
+// display city name for current weather section
 function updateCurrentWeather(city) {
   currentWeatherEl.children().eq(0).text(city);
   cityName = city;
   console.log(cityName)
   getCityLocation();
 }
+
 
 
 // run quick fetch and get the lat and lon of city
@@ -131,6 +116,7 @@ function getCityLocation() {
     getCityCurrentWeather();
   } )
 }
+
 
 
 // run quick fetch and display current weather
@@ -150,6 +136,7 @@ function getCityCurrentWeather() {
 }
 
 
+
 // function to get future weather
 function getCityFutureWeather() {
   var futureWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
@@ -167,6 +154,7 @@ function getCityFutureWeather() {
     displayFutureWeather(newForecastArr);
   } )
 }
+
 
 
 // display future weather
@@ -199,3 +187,23 @@ function displayFutureWeather(weatherArr) {
 
 
 
+
+// INITIAL THOUGHT PROCESS FOR THE ASSIGNMENT
+
+// When I search for a city
+  // presented with current weather conditions
+  // presented with 5-day future weather conditions
+  // that city is added to the search history
+
+
+
+
+  // event listener
+    // button - make an event listener for all buttons in this div. Then no matte
+    // trigger get city function
+    // trigger save to search history function
+      // create button
+    // trigger get API function
+    // trigger getCityWeather function
+    // trigger display current weather
+    // triger display future weather
