@@ -133,7 +133,7 @@ function getCityCurrentWeather() {
   var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
   
   quickFetch(currentWeatherUrl).then( function(data){
-    console.log(data);
+    // console.log(data);
     var currentIcon = $(`
       <p><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"/></p>
       `)
