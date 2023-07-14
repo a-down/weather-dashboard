@@ -7,6 +7,7 @@ const searchHistoryEl = $('.search-history')
 let cityName
 const currentWeatherEl = $('.current-weather-section')
 const futureWeatherEl = $('.future-weather-section')
+const weatherDisplayEl = $('.weather-display-section')
 var lat;
 var lon;
 
@@ -98,8 +99,7 @@ searchHistoryEl.on('click', 'button', function(event) {
 // make weather displays visible
 function updateCurrentWeather(city) {
   currentWeatherEl.children().eq(0).text(city);
-  currentWeatherEl.attr('style', 'visibility: visible;')
-  futureWeatherEl.attr('style', 'visibility: visible;')
+  weatherDisplayEl.attr('style', 'visibility: visible;')
   cityName = city;
   console.log(cityName)
   getCityLocation();
@@ -184,6 +184,8 @@ function displayFutureWeather(weatherArr) {
         </ul>
       </div>
     `)
+    newCard.attr('style', 'background-color: #87CEEB')
+    newCard.children().attr('style', 'background-color: #87CEEB')
     futureWeatherDisplay.append(newCard);
   }
 }

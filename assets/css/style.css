@@ -20,11 +20,12 @@ header {
   border-radius: 5px;
 } */
 
-button {
-  display: block;
+.weather-display-section {
+  visibility: hidden;
+  background-color: #F8F9FA;
+  border-radius: 10px;
 }
 
-.current-weather-section,
-.future-weather-section {
-  visibility: hidden;
+button {
+  display: block;
 }
