@@ -41,7 +41,7 @@ function getRegularDate(unix) {
 // display search history on load
 function displaySearchHistory() {
   searchHistory = JSON.parse(localStorage.getItem('Weather Search History:'));
-  console.log(searchHistory);
+  // console.log(searchHistory);
   if (searchHistory === null) {
     searchHistory = [];
   } else {
@@ -64,7 +64,7 @@ searchButton.on('click', function(event) {
     alert('Please enter a city name.')
     return
   }
-  console.log(cityName);
+  // console.log(cityName);
   searchInput.val('');
   saveSearchHistory(cityName);
   updateCurrentWeather(cityName);
@@ -89,7 +89,7 @@ function saveSearchHistory(city) {
 searchHistoryEl.on('click', 'button', function(event) {
   event.preventDefault();
   var cityNameHistory = $(this).text();
-  console.log(cityNameHistory)
+  // console.log(cityNameHistory)
   updateCurrentWeather(cityNameHistory);
 })
 
@@ -101,7 +101,7 @@ function updateCurrentWeather(city) {
   currentWeatherEl.children().eq(0).text(city);
   weatherDisplayEl.attr('style', 'visibility: visible;')
   cityName = city;
-  console.log(cityName)
+  // console.log(cityName)
   getCityLocation();
 }
 
@@ -110,13 +110,13 @@ function updateCurrentWeather(city) {
 // run quick fetch and get the lat and lon of city
 function getCityLocation() {
   var geocodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
-  console.log(geocodeUrl);
+  // console.log(geocodeUrl);
 
   quickFetch(geocodeUrl).then( function(data){
-    console.log(data)
+    // console.log(data)
     lat = data[0].lat;
     lon = data[0].lon;
-    console.log(lon)
+    // console.log(lon)
     getCityCurrentWeather();
   } )
 }
@@ -128,7 +128,7 @@ function getCityCurrentWeather() {
   var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
   
   quickFetch(currentWeatherUrl).then( function(data){
-    console.log(data);
+    // console.log(data);
     const tempDisplay = $('.temp-display');
     const windDisplay = $('.wind-display');
     const humidityDisplay = $('.humidity-display');
@@ -144,16 +144,16 @@ function getCityCurrentWeather() {
 // function to get future weather
 function getCityFutureWeather() {
   var futureWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
-  console.log(futureWeatherUrl);
+  // console.log(futureWeatherUrl);
   
 
   quickFetch(futureWeatherUrl).then( function(data){
-    console.log(data);
+    // console.log(data);
     const newForecastArr = [] 
     for( let i=0; i<40; i=i+8 ){
       newForecastArr.push( data.list[i])
     }
-    console.log(newForecastArr)
+    // console.log(newForecastArr)
     
     displayFutureWeather(newForecastArr);
   } )
@@ -169,7 +169,7 @@ function displayFutureWeather(weatherArr) {
   // for loop to display future weather cards
   for (i=0; i < 5; i++) {
     var fullDate = getRegularDate(weatherArr[i].dt);
-    console.log(fullDate);
+    // console.log(fullDate);
 
     var newCard = $(`
       <div class="card col-12 col-lg-2 m-2">
